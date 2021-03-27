@@ -18,9 +18,9 @@ public class Contract : MonoBehaviour
 
     public void on_sign_contract()
     {
-        ressource_used.decrease_value(qty_used);
-        if (type == Contract_type.capacity) ressource_gained.increase_capacity(qty_gained);
-        else ressource_gained.increase_value(qty_gained);
+        ressource_used.DecreaseValue(qty_used);
+        if (type == Contract_type.capacity) ressource_gained.IncreaseCapacity(qty_gained);
+        else ressource_gained.IncreaseValue(qty_gained);
     }
     
     // Start is called before the first frame update
