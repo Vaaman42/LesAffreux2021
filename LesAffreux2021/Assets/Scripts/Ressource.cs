@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ressources : MonoBehaviour
+public class Ressource : MonoBehaviour
 {
     Text text;
     public int current_max_capacity; //  Current capacity for this.ressource => public because we can put in unity the value for this ressource
@@ -24,14 +24,17 @@ public class Ressources : MonoBehaviour
         if (this._current_ressource <= 0) {
             this._current_ressource = 0;
         }
+        text.text = ressource_name  + " " + _current_ressource.ToString() + "/" + current_max_capacity.ToString();
     }
 
     public void increase_capacity(int value) { // Increase the current max capacity of the ressource
         this.current_max_capacity += value;
+        text.text = ressource_name  + " " + _current_ressource.ToString() + "/" + current_max_capacity.ToString();
     }
 
     public void decrease_capacity(int value) { // Decrease the current max capacity of the ressource
         this.current_max_capacity -= value;
+        text.text = ressource_name  + " " + _current_ressource.ToString() + "/" + current_max_capacity.ToString();
     }
 
     // Start is called before the first frame update
