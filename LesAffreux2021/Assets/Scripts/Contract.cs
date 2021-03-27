@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum Contract_type { capacity, value }
@@ -8,9 +9,13 @@ public enum Contract_type { capacity, value }
 public class Contract : MonoBehaviour
 {   
     public string _name; // Nom du contrat
+    public TextMeshPro ressource_used_text;
     public Ressource ressource_used; //Plastic
+    public TextMeshPro qty_used_text;
     public int qty_used; // Qty used 
+    public TextMeshPro ressource_gained_text;
     public Ressource ressource_gained; //Electricity
+    public TextMeshPro qty_gained_text;
     public int qty_gained; //qty of ressource gained
     
     [SerializeField]
