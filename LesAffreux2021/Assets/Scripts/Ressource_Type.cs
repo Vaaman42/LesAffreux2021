@@ -8,5 +8,5 @@ public enum Ressource_Type
     Oxygen,
     Food,
     Population,
-    Plastic,
+    Plastic
 }

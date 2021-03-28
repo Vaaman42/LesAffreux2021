@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Ressource_Controller : MonoBehaviour
 {
+    public static Ressource_Controller Instance;
     public Dictionary<Ressource_Type, Ressource> Ressources = new Dictionary<Ressource_Type, Ressource>();
     public Dictionary<Ressource_Type, int> Production = new Dictionary<Ressource_Type, int>();
     public Dictionary<Ressource_Type, int> DailyCost = new Dictionary<Ressource_Type, int>();
@@ -26,9 +27,12 @@ public class Ressource_Controller : MonoBehaviour
     public TextMeshPro CurrentPopulation;
     public TextMeshPro MaxPopulation;
 
+    public int NumberOfBuildings = 5;
+
     // Start is called before the first frame update
     public void Start()
     {
+        Instance = this;
         Ressources.Add(Ressource_Type.Electricity, new Ressource(100, 50));
         Ressources.Add(Ressource_Type.Food, new Ressource(100, 50));
         Ressources.Add(Ressource_Type.Oxygen, new Ressource(100, 50));
@@ -80,11 +84,11 @@ public class Ressource_Controller : MonoBehaviour
     public void NextDay()
     {
         IncreaseRessource(Ressource_Type.Electricity, Production[Ressource_Type.Electricity]);
-        DecreaseRessource(Ressource_Type.Electricity, DailyCost[Ressource_Type.Electricity]);
+        DecreaseRessource(Ressource_Type.Electricity, DailyCost[Ressource_Type.Electricity] * NumberOfBuildings);
         IncreaseRessource(Ressource_Type.Food, Production[Ressource_Type.Food]);
-        DecreaseRessource(Ressource_Type.Food, DailyCost[Ressource_Type.Food]);
+        DecreaseRessource(Ressource_Type.Food, DailyCost[Ressource_Type.Food] * Ressources[Ressource_Type.Population].GetCurrentValue());
         IncreaseRessource(Ressource_Type.Oxygen, Production[Ressource_Type.Oxygen]);
-        DecreaseRessource(Ressource_Type.Oxygen, DailyCost[Ressource_Type.Oxygen]);
+        DecreaseRessource(Ressource_Type.Oxygen, DailyCost[Ressource_Type.Oxygen] * NumberOfBuildings);
         IncreaseRessource(Ressource_Type.Plastic, Production[Ressource_Type.Plastic]);
         DecreaseRessource(Ressource_Type.Plastic, DailyCost[Ressource_Type.Plastic]);
         UpdateUI();
@@ -107,19 +111,19 @@ public class Ressource_Controller : MonoBehaviour
         sliderPopulation.maxValue = Ressources[Ressource_Type.Population].GetCapacity();
         MaxPopulation.text = Ressources[Ressource_Type.Population].GetCapacity().ToString();
 
-        sliderElectricity.value = Ressources[Ressource_Type.Electricity].GetCapacity();
-        CurrentElectricity.text = Ressources[Ressource_Type.Electricity].GetCapacity().ToString();
+        sliderElectricity.value = Ressources[Ressource_Type.Electricity].GetCurrentValue();
+        CurrentElectricity.text = Ressources[Ressource_Type.Electricity].GetCurrentValue().ToString();
 
-        sliderFood.value = Ressources[Ressource_Type.Food].GetCapacity();
-        CurrentFood.text = Ressources[Ressource_Type.Food].GetCapacity().ToString();
+        sliderFood.value = Ressources[Ressource_Type.Food].GetCurrentValue();
+        CurrentFood.text = Ressources[Ressource_Type.Food].GetCurrentValue().ToString();
 
-        sliderOxygen.value = Ressources[Ressource_Type.Oxygen].GetCapacity();
-        CurrentOxygen.text = Ressources[Ressource_Type.Oxygen].GetCapacity().ToString();
+        sliderOxygen.value = Ressources[Ressource_Type.Oxygen].GetCurrentValue();
+        CurrentOxygen.text = Ressources[Ressource_Type.Oxygen].GetCurrentValue().ToString();
 
-        sliderPlastic.value = Ressources[Ressource_Type.Plastic].GetCapacity();
-        CurrentPlastic.text = Ressources[Ressource_Type.Plastic].GetCapacity().ToString();
+        sliderPlastic.value = Ressources[Ressource_Type.Plastic].GetCurrentValue();
+        CurrentPlastic.text = Ressources[Ressource_Type.Plastic].GetCurrentValue().ToString();
 
-        sliderPopulation.value = Ressources[Ressource_Type.Population].GetCapacity();
-        CurrentPopulation.text = Ressources[Ressource_Type.Population].GetCapacity().ToString();
+        sliderPopulation.value = Ressources[Ressource_Type.Population].GetCurrentValue();
+        CurrentPopulation.text = Ressources[Ressource_Type.Population].GetCurrentValue().ToString();
     }
 }
