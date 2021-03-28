@@ -112,16 +112,16 @@ public class Ressource_Controller : MonoBehaviour
         MaxPopulation.text = Ressources[Ressource_Type.Population].GetCapacity().ToString();
 
         sliderElectricity.value = Ressources[Ressource_Type.Electricity].GetCurrentValue();
-        CurrentElectricity.text = Ressources[Ressource_Type.Electricity].GetCurrentValue().ToString();
+        CurrentElectricity.text = Ressources[Ressource_Type.Electricity].GetCurrentValue() + " (" + (Production[Ressource_Type.Electricity] - DailyCost[Ressource_Type.Electricity]) + ")";
 
         sliderFood.value = Ressources[Ressource_Type.Food].GetCurrentValue();
-        CurrentFood.text = Ressources[Ressource_Type.Food].GetCurrentValue().ToString();
+        CurrentFood.text = Ressources[Ressource_Type.Food].GetCurrentValue() + " (" + (Production[Ressource_Type.Food] - DailyCost[Ressource_Type.Food]) + ")";
 
         sliderOxygen.value = Ressources[Ressource_Type.Oxygen].GetCurrentValue();
-        CurrentOxygen.text = Ressources[Ressource_Type.Oxygen].GetCurrentValue().ToString();
+        CurrentOxygen.text = Ressources[Ressource_Type.Oxygen].GetCurrentValue() + " (" + (Production[Ressource_Type.Oxygen] - DailyCost[Ressource_Type.Oxygen]) + ")";
 
         sliderPlastic.value = Ressources[Ressource_Type.Plastic].GetCurrentValue();
-        CurrentPlastic.text = Ressources[Ressource_Type.Plastic].GetCurrentValue().ToString();
+        CurrentPlastic.text = Ressources[Ressource_Type.Plastic].GetCurrentValue() + " (" + (Production[Ressource_Type.Plastic] - DailyCost[Ressource_Type.Plastic]) + ")";
 
         sliderPopulation.value = Ressources[Ressource_Type.Population].GetCurrentValue();
         CurrentPopulation.text = Ressources[Ressource_Type.Population].GetCurrentValue().ToString();

@@ -1347,9 +1347,10 @@ MonoBehaviour:
   ressource_gained_text: {fileID: 8753543399680379229}
   ressource_gained: 0
   qty_gained: 1
-  SignArea: {fileID: 0}
   Signature: {fileID: 7554032009094186558}
+  Offset: {fileID: 0}
   type: 0
+  Signed: 0
 --- !u!54 &622613886
 Rigidbody:
   m_ObjectHideFlags: 0

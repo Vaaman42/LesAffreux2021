@@ -17,26 +17,40 @@ public class Contract : MonoBehaviour
     public Ressource_Type ressource_gained; //Electricity
     public int qty_gained; //qty of ressource gained
     public TextMeshPro Signature;
+    public Transform Offset;
     
     [SerializeField]
     private Contract_type type;
+
+    public bool Signed;
 
     void Start()
     {
         ContractName.text = _name;
         ressource_used_text.text = Translate(ressource_used) + " x" + qty_used;
         ressource_gained_text.text = Translate(ressource_gained) + " x" + qty_gained;
+        GetComponent<OVRGrabbable>().snapOffset = Offset;
     }
 
     public void on_sign_contract()
     {
-        Ressource_Controller.Instance.NumberOfBuildings++;
-        Ressource_Controller.Instance.DecreaseRessource(ressource_used, qty_used);
-        if (type == Contract_type.capacity) 
-            Ressource_Controller.Instance.IncreaseCapacity(ressource_used, qty_used);
-        else 
-            Ressource_Controller.Instance.IncreaseProduction(ressource_used, qty_used);
-        Signature.gameObject.SetActive(true);
+        if (Ressource_Controller.Instance.Ressources[ressource_used].GetCurrentValue() > qty_used)
+        {
+            Signed = true;
+            Ressource_Controller.Instance.NumberOfBuildings++;
+            Ressource_Controller.Instance.DecreaseRessource(ressource_used, qty_used);
+            if (type == Contract_type.capacity) 
+                Ressource_Controller.Instance.IncreaseCapacity(ressource_gained, qty_gained);
+            else 
+                Ressource_Controller.Instance.IncreaseProduction(ressource_gained, qty_gained);
+            Signature.gameObject.SetActive(true);
+            Debug.Log("OnSignature before");
+            Game_Controller.Instance.OnSignature(this);
+        }
+        else
+        {
+            ressource_used_text.color = Color.red;
+        }
     }
 
     private string Translate(Ressource_Type type)
@@ -65,7 +79,7 @@ public class Contract : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "pen")
+        if (!Signed && other.tag == "pen")
             on_sign_contract();
     }
 }
