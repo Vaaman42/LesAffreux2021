@@ -79,6 +79,7 @@ public class Ressource_Controller : MonoBehaviour
     public void IncreaseProduction(Ressource_Type type, int quantity)
     {
         Production[type] += quantity;
+        UpdateUI();
     }
 
     public void NextDay()
